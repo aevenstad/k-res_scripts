@@ -1,18 +1,21 @@
 #!/bin/bash
 
-# Wrapper script to run standalone LRE-Finder
+# Wrapper script to run LRE-Finder
 # Takes either Illumina or NanoPore input files
+
+
+# LRE-Finder container 
+lre_finder=/bigdata/Jessin/Softwares/containers/lre-finder_v1.0.0.sif
 
 
 Help() {
     echo "Usage: $0 [options]"
     echo "Options:"
     echo "  -h                Show this help message"
-    echo "  -s <sample_name>  Specify sample name"
+    echo "  -s <sample_name>  Specify sample name (used as output prefix)"
     echo "  -i <file>         Specify Illumina forward reads"
     echo "  -I <file>         Specify Illumina reverse reads"
     echo "  -n <file>         Specify NanoPore long reads"
-    echo "  -o <dir>          Specify output directory (default: current directory)"
 }
 
 if [[ " $@ " =~ " -h " ]]; then
@@ -20,7 +23,7 @@ if [[ " $@ " =~ " -h " ]]; then
     exit 0
 fi
 
-while getopts ":h:i:I:n:o:" option; do
+while getopts ":h:s:i:I:n:" option; do
     case $option in
         h)
             Help
@@ -44,8 +47,6 @@ while getopts ":h:i:I:n:o:" option; do
     esac
 done
 
-# LRE-Finder container path 
-lre_finder=/bigdata/Jessin/Softwares/containers/lre-finder_v1.0.0.sif
 
 # Get absolute path for input files
 if [ -n "$forward_reads" ]; then
@@ -59,6 +60,7 @@ if [ -n "$longreads" ]; then
 fi
 
 
+# Set bind arguments for input files
 bind_args=()
 if [ -n "$forward_reads" ]; then
     bind_args+=(--bind "$forward_reads:/data/forward_reads.fastq")
@@ -71,19 +73,23 @@ if [ -n "$longreads" ]; then
 fi
 
 
-lre_cmd=(LRE-Finder.py -o "$sample")
+# Set command for LRE-Finder
+identity=90
+lre_db=/lre-finder/elmDB/elm
 
+lre_cmd=(LRE-Finder.py -o "${sample}" -t_db "$lre_db" -ID "$identity" -1t1 -cge -matrix)
+
+## Add input files to command
 if [ -n "$forward_reads" ] && [ -n "$reverse_reads" ]; then
     lre_cmd+=(-ipe /data/forward_reads.fastq /data/reverse_reads.fastq)
 elif [ -n "$longreads" ]; then
-    lre_cmd+=(-n /data/longreads.fastq)
+    lre_cmd+=(-i /data/longreads.fastq)
 fi
 
 
+# run LRE-Finder container
 singularity exec \
     "${bind_args[@]}" \
-    $lre_finder \
+    "$lre_finder" \
     "${lre_cmd[@]}" \
-    -t_db /lre-finder/elmDB/elm \
-    -ID 90 -1t1 -cge -matrix |\
-    html2text > "${sample}/LRE-Finder_out.txt"
+    | html2text > "${sample}_LRE_out.txt"
