@@ -22,6 +22,17 @@ bakta <input_fasta> \
 --threads 12
 ```
 
+## Clinker 
+https://github.com/gamcil/clinker
+
+```
+Usage: clinker.sh [options] test.gff3 test_2.gff3 ...
+Options:
+  -h                Show this help message
+  -p <out.html>     Specify output HTML file
+  -i <identity>     Set identity threshold (default: 0.90)
+```
+
 
 ## LRE-Finder
 https://bitbucket.org/genomicepidemiology/lre-finder/src/master/
