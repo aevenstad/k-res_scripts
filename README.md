@@ -12,6 +12,16 @@ Options:
   -s <sample_name>  Specify sample name (output prefix)
   -i <file>         Specify assembly file (FASTA format)
 ```
+Will run Bakta with the following command:
+```
+bakta <input_fasta> \
+--output <sample_name>_bakta_out \
+--prefix <sample_name> \
+--db /bakta_db \ # The database is hardcoded in the script
+--keep-contig-headers \
+--threads 12
+```
+
 
 ## LRE-Finder
 https://bitbucket.org/genomicepidemiology/lre-finder/src/master/
@@ -24,3 +34,19 @@ Options:
   -I <file>         Specify Illumina reverse reads
   -n <file>         Specify NanoPore long reads
 ```
+
+This will run LRE-Finder with the following command:
+```
+LRE-Finder.py \
+-o <sample_name> \
+-t_db $lre_db \ # Database is provided in the container image
+-ID 90 \
+-1t1 \
+-cge \
+-matrix \
+# For illumina input
+-ipe $read_R1 $read_R2
+# For nanopore input
+-i $ONT_longread
+```
+
