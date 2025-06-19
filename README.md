@@ -3,6 +3,7 @@ Collection of wrapper scripts to run containerized tools at K-res
 
 
 ## Bakta
+https://github.com/oschwengers/bakta
 
 ```
 Usage: bakta.sh [options]
@@ -13,6 +14,7 @@ Options:
 ```
 
 ## LRE-Finder
+https://bitbucket.org/genomicepidemiology/lre-finder/src/master/
 ```
 Usage: lre-finder.sh [options]
 Options:
