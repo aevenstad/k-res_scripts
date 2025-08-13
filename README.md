@@ -61,3 +61,14 @@ LRE-Finder.py \
 -i $ONT_longread
 ```
 
+## Reorient plasmids
+Workflow for reorienting plasmids before running Clinker
+
+
+## Virulencefinder json to tsv
+Convert json output from virulencefinder to tsv:
+```
+virulencefinder_json2tsv.py <input.json> <output.tsv>
+```
+
+
