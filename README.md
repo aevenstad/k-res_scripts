@@ -1,5 +1,5 @@
-# Wrapper scripts
-Collection of wrapper scripts to run containerized tools at K-res
+# Scripts
+Collection of scripts to run different tools at K-res
 
 
 ## Bakta
