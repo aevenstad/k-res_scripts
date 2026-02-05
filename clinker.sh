@@ -57,7 +57,12 @@ fi
 input_files=("$@")
 
 # Set clinker command
-clinker_cmd=(clinker "${input_files[@]}" -p "$output_file" -i "$identity")
+clinker_cmd=(
+  clinker \
+  "${input_files[@]}" \
+  -p "$output_file" \
+  -i "$identity"
+)
 
 # Run clinker
 singularity exec \

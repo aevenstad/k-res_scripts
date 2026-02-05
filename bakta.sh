@@ -80,7 +80,14 @@ bind_args+=("-B" "$bakta_db:/bakta_db")
 # Prepare Bakta command
 output_dir=${sample}_bakta_out
 threads=12
-bakta_cmd=(bakta /data/assembly.fasta --output "${output_dir}" --prefix "${sample}" --db /bakta_db --keep-contig-headers --threads "$threads")
+bakta_cmd=(
+  bakta /data/assembly.fasta \
+    --output "${output_dir}" \
+    --prefix "${sample}" \
+    --db /bakta_db \
+    --keep-contig-headers \
+    --threads "$threads"
+  )
 
 # Run BAKTA container
 singularity exec \

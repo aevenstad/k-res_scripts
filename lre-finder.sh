@@ -77,7 +77,15 @@ fi
 identity=90
 lre_db=/lre-finder/elmDB/elm
 
-lre_cmd=(LRE-Finder.py -o "${sample}" -t_db "$lre_db" -ID "$identity" -1t1 -cge -matrix)
+lre_cmd=(
+  LRE-Finder.py \
+    -o "${sample}" \
+    -t_db "$lre_db" \
+    -ID "$identity" \
+    -1t1 \
+    -cge \
+    -matrix
+  )
 
 ## Add input files to command
 if [ -n "$forward_reads" ] && [ -n "$reverse_reads" ]; then

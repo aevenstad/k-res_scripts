@@ -62,7 +62,15 @@ bs_trees=1000
 seed=12345
 msa="/data/core_gene_alignment_filtered.aln"
 
-raxml_cmd=(raxml-ng --msa $msa --model $model --prefix $prefix --threads $threads --all --bs-trees $bs_trees --seed $seed)
+raxml_cmd=(raxml-ng \
+  --msa $msa \
+  --model $model \
+  --prefix $prefix \
+  --threads $threads \
+  --all \
+  --bs-trees $bs_trees \
+  --seed $seed
+)
 
 # Run raxml-ng
 singularity exec \

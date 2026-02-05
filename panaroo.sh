@@ -52,10 +52,21 @@ clean_mode="sensitive"
 threshold=0.99
 core_threshold=0.95
 threads=24
-panaroo_cmd=(panaroo --input $input --out_dir $outdir --alignment $alignment --clean-mode $clean_mode --remove-invalid-genes --merge_paralogs --threshold $threshold --core_threshold $core_threshold --threads $threads)
+
+panaroo_cmd=(
+  panaroo --input $input \
+  --out_dir $outdir \
+  --alignment $alignment \
+  --clean-mode $clean_mode \
+  --remove-invalid-genes \
+  --merge_paralogs \
+  --threshold $threshold \
+  --core_threshold $core_threshold \
+  --threads $threads
+)
 
 
-
+# Run panaroo
 singularity exec \
   "$container_dir/$panaroo" \
   "${panaroo_cmd[@]}"
