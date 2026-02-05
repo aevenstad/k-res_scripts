@@ -38,7 +38,6 @@ Help() {
   echo "  -h                Show this help message"
   echo "  -p <prefix>       Specify sample name (output prefix)"
   echo "  -i <file>         Specify assembly file (FASTA format)"
-  echo "  -s <species>      Species name"
 }
 
 if [[ " $@ " =~ " -h " ]]; then
@@ -46,7 +45,7 @@ if [[ " $@ " =~ " -h " ]]; then
   exit 0
 fi
 
-while getopts ":h:p:i:o:s:" option; do
+while getopts ":h:p:i:o:" option; do
   case $option in
   h)
     Help
@@ -57,9 +56,6 @@ while getopts ":h:p:i:o:s:" option; do
     ;;
   i)
     assembly_file="$OPTARG"
-    ;;
-  s)
-    species="$OPTARG"
     ;;
   \?)
     echo "Invalid option: -$OPTARG" >&2
@@ -84,7 +80,7 @@ bind_args+=("-B" "$bakta_db:/bakta_db")
 # Prepare Bakta command
 output_dir=${sample}_bakta_out
 threads=12
-bakta_cmd=(bakta /data/assembly.fasta --output "${output_dir}" --prefix "${sample}" --db /bakta_db --keep-contig-headers --threads "$threads" --species "$species")
+bakta_cmd=(bakta /data/assembly.fasta --output "${output_dir}" --prefix "${sample}" --db /bakta_db --keep-contig-headers --threads "$threads")
 
 # Run BAKTA container
 singularity exec \
