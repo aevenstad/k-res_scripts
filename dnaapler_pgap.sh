@@ -1,10 +1,12 @@
 #!/bin/bash
 #
-# Wrapper script to run PGAP annotation tool.
-# Written to work with output structure from
-# aevenstad/assembly_amr Nextflow pipeline
+# Wrapper script:
+# - Takes a list of plasmids
+# - Runs reorientation with dnaapler
+# - Annotates reoriented plasmids with PGAP
+# - Written to work with output structure from aevenstad/assembly_amr Nextflow pipeline
 #
-# Usage: bash run_pgap.sh -i <input_dir> -s <samplesheet>
+# Usage: bash dnaapler_pgap.sh -i <input_dir> -p <plasmid_list>
 #
 set -eo pipefail
 
