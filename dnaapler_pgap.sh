@@ -110,7 +110,7 @@ for plasmid in "${plasmid_ids[@]}"; do
       -o "${plasmid}_pgap" \
       -s "${rmlst_species}" \
       -g ${reoriented_fasta} \
-      --prefix "${plasmid}" \
+      --prefix "${plasmid}_reoriented" \
       --docker /usr/bin/singularity \
       --no-internet \
       --ignore-all-errors \
