@@ -56,6 +56,10 @@ fi
 
 input_files=("$@")
 
+# Bind current working directory
+bind_args=()
+bind_args+=("-B" "$(pwd):/data")
+
 # Set clinker command
 clinker_cmd=(
   clinker \
@@ -66,5 +70,6 @@ clinker_cmd=(
 
 # Run clinker
 singularity exec \
+    "${bind_args[@]}" \
     "$container_dir/$clinker" \
     "${clinker_cmd[@]}"
